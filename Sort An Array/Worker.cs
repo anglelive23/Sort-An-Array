@@ -24,7 +24,6 @@ namespace Sort_An_Array
 
         public int[] SortArray(int[] nums)
         {
-            int[] temp = new int[nums.Length];
             MergeSort(nums, 0, nums.Length - 1);
             return nums;
         }
@@ -44,23 +43,22 @@ namespace Sort_An_Array
         {
             int i = left;
             int j = mid + 1;
-
             int k = 0;
-            int[] temp = new int[nums.Length];
+            int[] temp = new int[left + right + 1];
 
             while (i <= mid && j <= right)
             {
-                if (nums[i] <= nums[j])
-                {
-                    temp[k++] = nums[i++];
-                }
-                else
-                    temp[k++] = nums[j++];
+                temp[k++] = (nums[i] <= nums[j]) ? nums[i++] : nums[j++];
             }
 
-            while (i <= mid) temp[k++] = nums[i++];
-            while (j <= right) temp[k++] = nums[j++];
-
+            while (i <= mid)
+            {
+                temp[k++] = nums[i++];
+            }
+            while (j <= right)
+            {
+                temp[k++] = nums[j++];
+            }
             for (int m = left; m <= right; m++)
             {
                 nums[m] = temp[m - left];
